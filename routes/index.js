@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   if(req.session.userId){
         var uid=req.session.userId;
     }
-    Blog.find({}).then(function(data){
+    Blog.find({}).sort('-postTime').then(function(data){
       if(data){
         console.log(data);
         res.render('index',{userId:uid,data:data});
