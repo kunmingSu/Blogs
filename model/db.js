@@ -39,8 +39,6 @@ var UserBlogSchema=db.Schema({
         ref:'User'
     }
 });
-var Blog=db.model('Bolg',BlogSchema);
-
 BlogSchema.methods.getPostTime=function(){
     var year=this.postTime.getFullYear();
     var month=this.postTime.getMonth()+1;
@@ -50,6 +48,9 @@ BlogSchema.methods.getPostTime=function(){
     var s=this.postTime.getSeconds();
     return (year+"-"+month+"-"+date+' '+h+":"+m+":"+s);
 }
+var Blog=db.model('Bolg',BlogSchema);
+
+
 var UserBlog=db.model('UserBlog',UserBlogSchema);
 //模块导出
 module.exports={

@@ -26,44 +26,41 @@
                     <ul class="dropdown-menu">
                         <li><a href="user/blog">我的博文</a></li>
                         <li><a href="user/post">博文发表</a></li>
-                        <li><a href="/">退出</a></li>
+                        <li><a href="/">返回</a></li>
                     </ul>
                 </li>
                 {{else}}
-                <li><a href="user/login">登录</a></li>
-                <li><a href="user/reg">注册</a></li>
+                <li><a href="/user/login">登录</a></li>
+                <li><a href="/user/reg">注册</a></li>
                 {{/if}}
             </ul>
         </nav>
-        
-        <div class="panel panel-warning" style="margin-top:80px;">
+        {{if userId}}
+        <div class="panel panel-success" style="margin-top:80px;">
               <div class="panel-heading">
-                    <h3 class="panel-title danger">博文信息</h3>
+                    <h3 class="panel-title">博文详情</h3>
               </div>
               <div class="panel-body">
-                    {{each data}}
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3 style="font-weight:bold"><span>标题:</span>{{$value.title}}</h3>
-                                <span>{{$value.getPostTime()}}</span>
+                                <h3 style="font-weight:bold"><span>标题:</span>{{data.title}}</h3>
+                                <div>发布于： <span>{{data.getPostTime()}}</span></div>
                                 <hr>
                                 <p class="h4">
-                                    <span>分类:</span>{{$value.classify}}
+                                    <span>分类:</span>{{data.classify}}
                                 </p>
                                 <p>
-                                    <span>正文:</span>{{$value.txt}}
+                                    <span>正文:</span>{{data.txt}}
                                 </p>
                             </div>
-                            <button class="btn btn-success" style="margin-left:50%" onclick="location.href='user/{{$value.id}}'">查看详情</button>
                         </div>
-                        
                     </div>
-                    {{/each}}
               </div>
         </div>
-        
+        {{else}}
+        <div></div>
+        {{/if}}
     </div>
-    
 </body>
 </html>

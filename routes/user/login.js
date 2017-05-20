@@ -92,6 +92,20 @@ router.get('/blog',(req,res)=>{
     });
 });
 
+//查看详情路由
+router.get('/:id',(req,res)=>{
+    var bid=req.params.id;
+    if(req.session.userId){
+       var uid=req.session.userId;
+    }
+    Blog.findById({_id:bid}).then(function(data){
+        console.log(data);
+        res.render('user/detail',{userId:uid,data:data})
+    }).catch(function(err){
+        console.log(err);
+    })
+});
+
 
 
 
