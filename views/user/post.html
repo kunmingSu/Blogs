@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <a class="navbar-brand" href="#">Blog</a>
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="/">主页</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="margin-right:15px;">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人中心<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user/login">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="panel panel-success" style="margin-top:80px;">
+              <div class="panel-heading">
+                    <h3 class="panel-title">发表</h3>
+              </div>
+              <div class="panel-body">
+                    <form action="" method="POST" role="form">
+
+                        <div class="form-group">
+                            <label for="title">标题：</label>
+                            <input type="text" name="title" class="form-control" id="title">
+                        </div>
+                        <div class="form-group">
+                            <label for="cont">内容分类：</label>
+                            <select name="classify" class="form-control">
+                                <option>HTML5</option>
+                                <option>CSS3</option>
+                                <option>JavaScript</option>
+                                <option>jquery</option>
+                                <option>BackboneJs</option>
+                                <option>VueJs</option>
+                                <option>其他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <p>正文：</p>
+                            <textarea name="txt" id="conts" cols="100%" rows="15"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" name="file" class="info" id="file">
+                        </div>
+                        <button type="submit" class="btn btn-primary">发表</button>
+                    </form>    
+              </div>
+        </div>
+    </div>
+</body>
+<script>
+    $('form').submit(function(e){
+        e.preventDefault();
+        if($('#title').val() =='' && $('#conts').val() =='' ){
+            alert('博文不能为空!');
+            return;
+        }
+        $.ajax({
+            url:'/user/api/v1/get_data',
+            type:'post',
+            data:$('form').serialize(),
+            dataType:'json',
+            success:function(res){
+                alert(res.msg);
+                if(res.status == 200){
+                    location.href='../';
+                }
+            },
+            error:function(err){
+                console.dir(err);
+            }
+        });
+    });
+</script>
+</html>
